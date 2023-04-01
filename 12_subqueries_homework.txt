@@ -1,0 +1,31 @@
+SELECT COUNT(*) FROM film
+WHERE length > (
+	SELECT AVG(length) FROM film
+)
+
+
+----------------------------------------------------
+
+SELECT COUNT(*) FROM film
+WHERE rental_rate = (
+	SELECT MIN(rental_rate) FROM film
+)
+
+-----------------------------------------------------
+
+
+
+----------------------------------------------------
+
+SELECT * FROM customer
+WHERE customer_id = ANY (
+	
+	SELECT customer_id from payment
+	WHERE amount = ANY (
+	
+		SELECT MIN(amount) FROM payment
+		
+	)
+	
+)
+
